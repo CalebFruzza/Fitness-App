@@ -1,0 +1,73 @@
+/* ============================
+   Global Theme Colors
+   ============================ */
+   :root {
+    --primary-purple: #6A3CC7;  /* main purple background color */
+    --purple-dark: #4E2A94;
+    --purple-light: #8F63E1;
+    --accent-green: #31A852;
+    --accent-red: #E84C3D;
+    --accent-yellow: #F5A623;
+    --text-dark: #1A1A1A;
+    --text-light: #ffffff;
+    --bg-light: #f7f7f7;
+    --card-bg: #ffffff;
+}
+
+/* ============================
+   BASE STYLES
+   ============================ */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* ============================
+   HEADER / NAVIGATION
+   ============================ */
+   header {
+    background-color: var(--primary-purple);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+header img.logo {
+    height: 75px;
+}
+
+
+
+/* ============================
+   BUTTONS
+   ============================ */
+button, .btn {
+    background-color: var(--primary-purple);
+    color: var(--text-light);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--purple-dark);
+}
+
+
+
+
+/* ============================
+   FOOTER
+   ============================ */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--primary-purple);
+    color: var(--text-light);
+    margin-top: 40px;
+}

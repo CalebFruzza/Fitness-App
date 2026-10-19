@@ -1,0 +1,141 @@
+/* Layout */
+.chat-layout {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    height: calc(100vh - 80px); /* fills screen under navbar */
+}
+
+/* Sidebar */
+.chat-sidebar {
+    width: 280px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    height: 100%;
+    overflow-y: auto;
+}
+
+.chat-sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #6A3CC7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.chat-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #f4f4ff;
+    font-size: 0.9rem;
+}
+
+.chat-item:hover {
+    background: #e2d9ff;
+}
+
+/* Chat container */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Chat box */
+.chat-box {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: linear-gradient(to bottom, #ffffff, #f6f2ff);
+}
+
+/* Messages */
+.chat-message {
+    margin-bottom: 10px;
+}
+
+.user-message {
+    text-align: right;
+}
+
+.user-message span {
+    background: #6A3CC7;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 15px 15px 0 15px;
+    display: inline-block;
+}
+
+.bot-message {
+    text-align: left;
+}
+
+.bot-message span {
+    background: #eaeaea;
+    padding: 8px 12px;
+    border-radius: 15px 15px 15px 0;
+    display: inline-block;
+}
+
+/* Input */
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-area input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.chat-input-area button {
+    background: #6A3CC7;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.chat-input-area button:hover {
+    background: #4E2A94;
+}
+
+/* Background */
+body {
+    background: linear-gradient(135deg, #f7f7ff, #efe9ff);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#d9ccff 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.dashboard-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    padding: 0 40px;
+}

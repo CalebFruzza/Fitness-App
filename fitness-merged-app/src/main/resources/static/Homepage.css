@@ -1,0 +1,337 @@
+/* ============================
+   THEME VARIABLES
+   ============================ */
+   :root {
+    --primary-purple: #6A3CC7;
+    --purple-dark: #4E2A94;
+    --purple-light: #8F63E1;
+    --accent-green: #31A852;
+    --accent-red: #E84C3D;
+    --accent-yellow: #F5A623;
+    --text-dark: #1A1A1A;
+    --text-light: #ffffff;
+    --bg-light: #f7f7f7;
+    --card-bg: #ffffff;
+}
+
+/* ============================
+   BASE STYLES
+   ============================ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.main-content {
+    padding: 30px 16px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ============================
+   HEADER
+   ============================ */
+header {
+    background-color: var(--primary-purple);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+}
+
+header .logo {
+    height: 70px; /* adjust if needed */
+}
+
+
+.daily-reminder {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    background: #ffffff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    font-size: 0.95rem;
+    z-index: 999;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.daily-reminder.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.streak-counter {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #6A3CC7;
+}
+
+
+.progress-rings {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.ring {
+    text-align: center;
+}
+
+.ring svg {
+    width: 120px;
+    height: 120px;
+    transform: rotate(-90deg);
+}
+
+.ring svg circle {
+    fill: none;
+    stroke: var(--primary-purple);
+    stroke-width: 10;
+    stroke-dasharray: 314; /* 2πr = ~314 when r=50 */
+    stroke-dashoffset: 314;
+    transition: stroke-dashoffset 1.5s ease;
+}
+
+.ring-label {
+    margin-top: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+.stats-bar {
+    width: 100%;
+    height: 8px;
+    background: #e4d4f9;
+}
+
+.stats-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--primary-purple);
+    transition: width 2s ease;
+}
+
+/* HEADER LAYOUT */
+header {
+    background-color: var(--primary-purple);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+header .logo {
+    height: 70px;
+}
+
+/* NAVIGATION LINKS */
+.nav-links {
+    display: flex;
+    gap: 25px;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+
+
+
+
+/* ============================
+   DASHBOARD CARD
+   ============================ */
+.dashboard-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    margin: 30px auto 40px;
+    padding: 24px 28px 28px;
+    max-width: 700px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
+}
+
+/* thin purple line at top like your example */
+.dashboard-top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--primary-purple);
+    border-radius: 10px 10px 0 0;
+}
+
+.dashboard-header-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.dashboard-date {
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #777;
+}
+
+.dashboard-title {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.dashboard-subtitle {
+    margin: 0 0 18px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.dashboard-body {
+    margin-top: 8px;
+}
+
+.metric h2 {
+    margin: 0 0 6px;
+    font-size: 1.15rem;
+}
+
+.metric-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0 0 8px;
+    color: var(--primary-purple);
+}
+
+.metric-description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+.loading {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    color: #777;
+}
+
+/* ============================
+   HOME LINK CARDS
+   ============================ */
+.home-links {
+    margin-top: 10px;
+}
+
+.home-links-title {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+.home-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.home-link-card {
+    display: block;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--text-dark);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.home-link-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+}
+
+.home-link-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.home-link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-purple);
+}
+
+
+
+
+
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 600px) {
+    .dashboard-card {
+        padding: 20px 18px 22px;
+    }
+
+    header .logo {
+        height: 60px;
+    }
+}
+
+.user-name-display {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+
+/* DROPDOWN STYLING */
+.date-dropdown {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: var(--card-bg);
+    color: var(--primary-purple);
+    font-weight: 600;
+    margin-top: 8px;
+    width: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.date-dropdown:hover {
+    border-color: var(--primary-purple);
+}

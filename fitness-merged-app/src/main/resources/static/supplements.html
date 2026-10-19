@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Supplements - Fitness App</title>
+
+<link rel="stylesheet" href="wellness-style.css">
+<script src="wellness-script.js" defer></script>
+
+</head>
+
+
+<body>
+
+<div class="loader"></div>
+
+<div class="overlay"></div>
+
+
+<header class="header">
+
+<img src="logo-wellness.png" class="logo" alt="Fitness Logo">
+
+<h1 class="site-title">Fitness App</h1>
+
+<button id="menu-toggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+<nav class="nav-links">
+
+<a href="diets.html">Diets</a>
+<a href="Homepage.html">Home</a>
+<a href="exercise-physical.html">Physical Activity</a>
+<a href="pt-chatbot.html">PT Bot</a>
+<a href="about.html">About Us</a>
+<a href="supplements.html" class="active">Supplements</a>
+
+</nav>
+
+</header>
+
+
+
+<section class="purple-banner">
+Supplements
+</section>
+
+
+
+<section class="section-alt">
+
+<h2 class="section-title">Choose the Right Supplements</h2>
+
+<p>Select supplements based on your goals.</p>
+
+<div class="control-section">
+
+<select id="goalSelect">
+
+<option value="" disabled selected>Select Goal</option>
+<option value="muscle">Build Muscle</option>
+<option value="fatloss">Fat Loss</option>
+<option value="stress">Stress Relief</option>
+<option value="energy">Increase Energy</option>
+<option value="immunity">Boost Immunity</option>
+
+</select>
+
+<br>
+
+<button id="goalBtn" class="btn">Filter</button>
+<button id="showAllBtn" class="btn">Show All</button>
+
+</div>
+
+</section>
+
+
+
+<section class="section-alt">
+
+<h2 class="section-title">Check Age Restriction</h2>
+
+<p>Some supplements are recommended for ages 16+.</p>
+
+<div class="control-section">
+
+<input type="number" id="ageInput" placeholder="Enter your age">
+
+<br>
+
+<button id="ageBtn" class="btn">Check</button>
+
+<p id="ageMessage"></p>
+
+</div>
+
+</section>
+
+
+
+<section class="section-alt">
+
+<h2 class="section-title">Available Supplements</h2>
+
+<div class="values-grid">
+
+<div class="value-box" data-type="muscle">
+<h3>🥤Protein Powder</h3>
+<p>Helps muscle recovery and growth.</p>
+</div>
+
+<div class="value-box" data-type="muscle">
+<h3>⚡Creatine <span class="warning-tag">16+</span></h3>
+<p>Improves strength performance.</p>
+</div>
+
+<div class="value-box" data-type="health">
+<h3>🐟Omega-3</h3>
+<p>Supports heart and brain health.</p>
+</div>
+
+<div class="value-box" data-type="health">
+<h3>🌿Magnesium</h3>
+<p>Helps relaxation and muscle recovery.</p>
+</div>
+
+<div class="value-box" data-type="muscle">
+<h3>🔥Pre-Workout <span class="warning-tag">16+</span></h3>
+<p>Boosts energy for workouts.</p>
+</div>
+
+<div class="value-box" data-type="health">
+<h3>☀️Vitamin D</h3>
+<p>Supports mood and immune system.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section-alt">
+
+<h2 class="section-title">Track Supplement Intake</h2>
+
+<p>Save supplement intake to the Spring Boot backend and load user-specific history.</p>
+
+<div class="control-section">
+
+<input type="number" id="userIdInput" placeholder="Enter user ID">
+<br>
+<input type="text" id="supplementNameInput" placeholder="Supplement name">
+<br>
+<input type="text" id="dosageInput" placeholder="Dosage">
+<br>
+<input type="date" id="dateTakenInput">
+<br>
+
+<button id="saveSupplementBtn" class="btn">Save Intake</button>
+<button id="loadHistoryBtn" class="btn">Load History</button>
+
+<p id="apiMessage"></p>
+
+</div>
+
+</section>
+
+<section class="section-alt">
+
+<h2 class="section-title">Supplement History</h2>
+
+<div class="control-section">
+<ul id="historyList"></ul>
+</div>
+
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+/* HEADER CONTAINER */
+header {
+  background: linear-gradient(90deg, #6A3CC7, #8F63E1);
+  padding: 12px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO */
+header .logo {
+  height: 60px;
+}
+
+/* NAVIGATION */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  font-weight: 600;
+}
+
+/* LINKS */
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  opacity: 0.85;
+}
+
+
+
+
+
+
+
+
+/* ============================
+   Global Theme Colors
+   ============================ */
+   :root {
+    --primary-purple: #6A3CC7;  /* main purple background color */
+    --purple-dark: #4E2A94;
+    --purple-light: #8F63E1;
+    --accent-green: #31A852;
+    --accent-red: #E84C3D;
+    --accent-yellow: #F5A623;
+    --text-dark: #1A1A1A;
+    --text-light: #ffffff;
+    --bg-light: #f7f7f7;
+    --card-bg: #ffffff;
+}
+
+/* ============================
+   BASE STYLES
+   ============================ */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* ============================
+   HEADER / NAVIGATION
+   ============================ */
+   header {
+    background-color: var(--primary-purple);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+header img.logo {
+    height: 75px;
+}
+
+
+
+/* ============================
+   BUTTONS
+   ============================ */
+button, .btn {
+    background-color: var(--primary-purple);
+    color: var(--text-light);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--purple-dark);
+}
+
+
+
+
+/* ============================
+   FOOTER
+   ============================ */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--primary-purple);
+    color: var(--text-light);
+    margin-top: 40px;
+}
+/* ============================
+   DIET PAGE ADDITIONS
+   (does not change your header/footer)
+   ============================ */
+
+/* Main layout for the diet page content */
+.page-container {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 16px 40px;
+  }
+  
+  /* Card-style sections */
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px 18px 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+  
+  .card h2 {
+    margin-top: 0;
+  }
+  
+  .section-desc {
+    font-size: 0.9rem;
+    color: #666666;
+  }
+  
+  /* Grid form layout */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 14px;
+    margin-bottom: 12px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .helper {
+    font-size: 0.8rem;
+    color: #666666;
+  }
+  
+  .error {
+    color: #d62828;
+    font-size: 0.85rem;
+  }
+  
+  /* Editable protein input */
+  .macro-input {
+    width: 80px;
+    padding: 4px 6px;
+    margin-left: 6px;
+  }
+  
+  /* Filter row + chips for meals */
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  /* Optional: highlight active chip using your purple variable if you have one */
+  .chip.active {
+    /* Adjust if your original file uses different purple variables */
+    background: var(--primary-purple, #6a4acb);
+    color: #fff;
+  }
+  
+  /* Meal cards */
+  .meal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  
+  .plan-card {
+    border-radius: 8px;
+    border: 1px solid #e1e1ef;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  /* Tracker grid */
+  .tracker-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  
+  /* Tracker visuals layout */
+  .tracker-visuals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 16px;
+    align-items: center;
+  }
+  
+  /* Circular gauge */
+  .circle-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+  }
+  
+  .progress-ring {
+    transform: rotate(-90deg);
+  }
+  
+  .progress-bg {
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 10;
+  }
+  
+  .progress-value {
+    fill: none;
+    stroke: var(--accent-green, #2a9d8f);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 0 999;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s ease;
+  }
+  
+  .circle-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  
+  /* Tracker numbers & bar */
+  .tracker-numbers {
+    flex: 1;
+    min-width: 220px;
+    font-size: 0.9rem;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: #e0e0ed;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  
+  .progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--accent-green, #2a9d8f);
+    transition: width 0.3s ease;
+  }
+  
+  /* Responsive tweaks for smaller screens */
+  @media (max-width: 720px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .meal-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .tracker-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .tracker-visuals {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  /* Macros slider layout */
+.macro-row {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 8px 16px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .macro-label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .macro-control {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .macro-slider {
+    width: 100%;
+  }
+  
+  .macro-values {
+    font-size: 0.85rem;
+    color: #444;
+  }
+  
+  /* Responsive tweak */
+  @media (max-width: 720px) {
+    .macro-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness App – Home</title>
+    <link rel="stylesheet" href="Homepage.css" />
+    <link rel="icon" type="image/png" href="logo.png">
+
+</head>
+
+
+<body>
+    <!-- Header -->
+    <header>
+        <img src="logo.png" alt="Fitness App Logo" class="logo" />
+    
+        <nav class="nav-links">
+            <a href="Homepage.html">Home</a>
+            <a href="diets.html">Diets</a>
+            <a href="exercise-physical.html">Exercise & Physical</a>
+            <a href="pt-chatbot.html">PT Chatbot</a>
+            <a href="supplements.html">Supplements</a>
+            <a href="about.html">About Us</a>
+        </nav>
+    </header>
+    
+    <div class="stats-bar">
+        <div class="stats-fill" id="stats-fill"></div>
+    </div>
+<script>
+// later this value can come from backend daily activity %
+let dailyProgress = 70; // 70% example
+
+const fill = document.getElementById("stats-fill");
+setTimeout(() => {
+    fill.style.width = dailyProgress + "%";
+}, 500);
+</script>    
+
+    <div id="daily-reminder" class="daily-reminder">
+        💧 Remember to drink water today!
+    </div>
+<script>
+// DAILY REMINDER POPUP
+const reminder = document.getElementById("daily-reminder");
+setTimeout(() => {
+    reminder.classList.add("show");
+}, 500);  // appear after 0.5s
+
+setTimeout(() => {
+    reminder.classList.remove("show");
+}, 3500); // disappear after 3 seconds
+
+</script>    
+
+    <main class="main-content">
+
+
+
+
+        <!-- DASHBOARD CARD -->
+        <section class="dashboard-card">
+            <div class="dashboard-top-line"></div>
+
+            <div class="dashboard-header-row">
+                <div class="dashboard-date" id="dashboard-date"></div>
+                <h1 class="dashboard-title">Dashboard</h1>
+
+                 <select id="date-range-select" class="date-dropdown"></select>
+            </div>
+           
+            <p id="welcome-message" class="welcome-message"></p>
+
+            <p id="user-name-display" class="user-name-display"></p>
+            <script>
+           // USER NAME DISPLAY
+const userName = "User"; // later: replace with real logged-in user
+document.getElementById("user-name-display").textContent = `Welcome back, ${userName}!`;
+
+
+
+            </script>
+
+           
+
+
+
+          <p class="dashboard-subtitle">
+                Overview of your day based on diet and exercise.
+            </p>
+
+            <div class="dashboard-body">
+                <div class="metric">
+                    <h2>Calories Left</h2>
+<p class="metric-value" id="calories-left">0 kcal</p>
+                    <p id="net-calories">0 kcal</p>
+                </div>
+
+                <div id="loading-text" class="loading">Loading dashboard...</div>
+               
+
+                <script> 
+                window.addEventListener("load", () => {
+    const load = document.getElementById("loading-text");
+    setTimeout(() => {
+        load.style.display = "none";
+    }, 1500);
+});
+
+                
+                
+                </script>
+
+            </div>
+        </section>
+        <p id="streak-counter" class="streak-counter"></p>
+
+<script>
+// STREAK COUNTER USING BACKEND API
+const streakElement = document.getElementById("streak-counter");
+
+async function loadStreakData() {
+    try {
+        // Record visit and get updated user stats
+        const response = await fetch(`/api/user/${userName}/visit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const user = await response.json();
+        
+        // Update streak display
+        const streak = user.currentStreak;
+        streakElement.textContent = `🔥 Streak: ${streak} day${streak > 1 ? "s" : ""}`;
+        
+        console.log('Streak data loaded:', user);
+    } catch (error) {
+        console.log('Error loading streak data from backend, falling back to default:', error);
+        streakElement.textContent = '🔥 Streak: 0 days';
+    }
+}
+
+// Load streak data when page loads
+window.addEventListener("load", loadStreakData);
+</script>
+
+
+<section class="progress-rings">
+
+    <!-- Calorie Intake -->
+    <div class="ring">
+        <div class="ring-wrapper">
+            <svg><circle cx="60" cy="60" r="50"></circle></svg>
+            <div class="ring-center">
+                <span id="calories-in">0</span>
+                <small>kcal</small>
+            </div>
+        </div>
+        <div class="ring-label">Calorie Intake</div>
+    </div>
+
+    <!-- Calories Burned -->
+    <div class="ring">
+        <div class="ring-wrapper">
+            <svg><circle cx="60" cy="60" r="50"></circle></svg>
+            <div class="ring-center">
+                <span id="calories-out">0</span>
+                <small>kcal</small>
+            </div>
+        </div>
+        <div class="ring-label">Calories Burned</div>
+    </div>
+
+    <!-- Net Calories -->
+    <div class="ring">
+        <div class="ring-wrapper">
+            <svg><circle cx="60" cy="60" r="50"></circle></svg>
+            <div class="ring-center">
+                <span id="net-calories-ring">0</span>
+                <small>kcal</small>
+            </div>
+        </div>
+        <div class="ring-label">Net Calories</div>
+    </div>
+
+</section>
+
+<script>
+// Function to animate rings
+function animateRings(data) {
+    const circles = document.querySelectorAll(".progress-rings circle");
+
+    const progressValues = [
+        data.caloriesIn / data.goal,   // intake progress
+        data.caloriesOut / 600,        // burned (custom max)
+        netCalories / data.goal        // net
+    ];
+
+    circles.forEach((circle, i) => {
+        const circumference = 314;
+        circle.style.strokeDasharray = circumference;
+
+        const offset = circumference - Math.min(progressValues[i], 1) * circumference;
+        
+        setTimeout(() => {
+            circle.style.strokeDashoffset = offset;
+        }, 300);
+    });
+}
+
+// Fetch calorie data from backend
+let data = {
+    caloriesIn: 1500,
+    caloriesOut: 400,
+    goal: 2000
+};
+
+fetch('/api/dashboard/summary?range=today')
+    .then(response => response.json())
+    .then(backendData => {
+        data = {
+            caloriesIn: backendData.caloriesIn,
+            caloriesOut: backendData.caloriesOut,
+            goal: backendData.goal
+        };
+        updateDashboard(data);
+    })
+    .catch(error => {
+        console.log('Error fetching calorie data, using fallback values:', error);
+        updateDashboard(data);
+    });
+
+function updateDashboard(data) {
+    // Calculations
+    const netCalories = data.caloriesIn - data.caloriesOut;
+    const caloriesLeft = data.goal - netCalories;
+
+    // Update dashboard
+    document.getElementById("calories-left").textContent = caloriesLeft + " kcal";
+
+    // Update ring numbers
+    document.getElementById("calories-in").textContent = data.caloriesIn;
+    document.getElementById("calories-out").textContent = data.caloriesOut;
+    document.getElementById("net-calories-ring").textContent = netCalories;
+
+    // Animate rings
+    const circles = document.querySelectorAll(".progress-rings circle");
+    const progressValues = [
+        data.caloriesIn / data.goal,
+        data.caloriesOut / 600,
+        netCalories / data.goal
+    ];
+
+    circles.forEach((circle, i) => {
+        const circumference = 314;
+        circle.style.strokeDasharray = circumference;
+
+        const offset = circumference - Math.min(progressValues[i], 1) * circumference;
+        
+        setTimeout(() => {
+            circle.style.strokeDashoffset = offset;
+        }, 300);
+    });
+}
+</script>
+
+
+
+
+
+
+
+        <!-- LINKS TO OTHER PAGES -->
+        <section class="home-links">
+            <h2 class="home-links-title">Explore the app</h2>
+
+            <div class="home-links-grid">
+                <!-- Diets -->
+                <a href="diets.html" class="home-link-card">
+                    <h3>Diets</h3>
+                    <p>
+                        View and log your meals, track daily calorie intake, and check
+                        how your diet impacts your goals.
+                    </p>
+                </a>
+
+                <!-- Exercise & Physical -->
+                <a href="exercise-physical.html" class="home-link-card">
+                    <h3>Exercise &amp; Physical</h3>
+                    <p>
+                        Record workouts and physical activities to see how many
+                        calories you burn throughout the day.
+                    </p>
+                </a>
+
+                <!-- PT Chatbot -->
+                <a href="pt-chatbot.html" class="home-link-card">
+                    <h3>PT Chatbot</h3>
+                    <p>
+                        Ask our virtual personal trainer for workout suggestions,
+                        tips, and motivation.
+                    </p>
+                </a>
+
+                <!-- Supplements -->
+                <a href="supplements.html" class="home-link-card">
+                    <h3>Supplements</h3>
+                    <p>
+                        Learn about different supplements and how they can support
+                        your training and recovery.
+                    </p>
+                </a>
+
+                <!-- About Us -->
+                <a href="about.html" class="home-link-card">
+                    <h3>About Us</h3>
+                    <p>
+                        Read about the goals of this app, our team, and how we support
+                        a healthier lifestyle.
+                    </p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!--  JavaScript for date (and later Net Calories) -->
+    <script>
+        // Set current date in the dashboard
+        const dateElement = document.getElementById("dashboard-date");
+        const now = new Date();
+        const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+        dateElement.textContent = now.toLocaleDateString(undefined, options);
+
+        // Placeholder for future  when backend exists
+        // For now, just show a static example value
+        const netCaloriesElement = document.getElementById("net-calories");
+        netCaloriesElement.textContent = "0 kcal"; // later this will come from backend
+    </script>
+
+<script>
+
+const welcome = document.getElementById("welcome-message");
+const hr = new Date().getHours();
+
+if (hr < 12) {
+    welcome.textContent = "Good Morning!";
+} else if (hr < 18) {
+    welcome.textContent = "Good Afternoon!";
+} else {
+    welcome.textContent = "Good Evening!";
+}
+
+
+
+</script>
+
+
+<script>
+const dateRangeSelect = document.getElementById("date-range-select");
+const dashboardDateEl = document.getElementById("dashboard-date");
+const netCaloriesEl = document.getElementById("net-calories");
+const circlesJS = document.querySelectorAll(".progress-rings circle");
+
+// Get current date
+// Using existing 'now' declared earlier
+const currentMonthIndex = now.getMonth();
+const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+// Helper to get valid previous month index
+function getPrevMonth(amount) {
+    const index = currentMonthIndex - amount;
+    return index >= 0 ? index : null;
+}
+
+// Add default dropdown values
+let dropdownOptions = `
+    <option value="today">Today</option>
+    <option value="lastWeek">Last Week</option>
+    <option value="lastMonth">${monthNames[getPrevMonth(1)]}</option>
+`;
+
+if (getPrevMonth(2) !== null) {
+    dropdownOptions += `<option value="twoMonths">${monthNames[getPrevMonth(2)]}</option>`;
+}
+if (getPrevMonth(3) !== null) {
+    dropdownOptions += `<option value="threeMonths">${monthNames[getPrevMonth(3)]}</option>`;
+}
+dateRangeSelect.innerHTML = dropdownOptions;
+
+// Mock data (replace with real backend values later)
+const dataSamples = {
+    today: { calories: 1200, exercise: 30, steps: 8500 },
+    lastWeek: { calories: 1100, exercise: 45, steps: 9200 },
+    lastMonth: { calories: 1050, exercise: 40, steps: 8800 },
+    twoMonths: { calories: 1020, exercise: 35, steps: 8400 },
+    threeMonths: { calories: 980, exercise: 30, steps: 8000 }
+};
+
+// Calculate date ranges
+function getDateRange(period) {
+    const endDate = new Date();
+    let startDate = new Date();
+
+    switch (period) {
+        case "today":
+            startDate = endDate;
+            break;
+        case "lastWeek":
+            startDate.setDate(startDate.getDate() - 7);
+            break;
+        case "lastMonth":
+            startDate.setMonth(startDate.getMonth() - 1, 1);
+            break;
+        case "twoMonths":
+            startDate.setMonth(startDate.getMonth() - 2, 1);
+            break;
+        case "threeMonths":
+            startDate.setMonth(startDate.getMonth() - 3, 1);
+            break;
+    }
+
+    return `${startDate.toLocaleDateString()} ➝ ${endDate.toLocaleDateString()}`;
+}
+
+// Update UI when selection changes
+dateRangeSelect.addEventListener("change", () => {
+    const selected = dateRangeSelect.value;
+    const data = dataSamples[selected];
+
+    dashboardDateEl.textContent = getDateRange(selected);
+    netCaloriesEl.textContent = data.calories + " kcal";
+
+    // Update circular meters
+    const progressValues = [
+        data.calories / 2000,
+        data.exercise / 60,
+        data.steps / 10000
+    ];
+
+    circlesJS.forEach((circle, i) => {
+        const circumference = 314;
+        const offset = circumference - Math.min(progressValues[i], 1) * circumference;
+        circle.style.strokeDashoffset = offset;
+    });
+});
+
+// Set initial to Today
+dateRangeSelect.value = "today";
+dateRangeSelect.dispatchEvent(new Event("change"));
+</script>
+<script src="homepage-dashboard.js"></script>
+</body>
+</html>

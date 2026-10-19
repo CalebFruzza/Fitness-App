@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness App – Exercise</title>
+    <link rel="stylesheet" href="exercise.css" />
+    <link rel="icon" type="image/png" href="logo.png">
+
+</head>
+
+
+<body>
+    <!-- Header -->
+    <header>
+        <img src="logo.png" alt="Fitness App Logo" class="logo" />
+    
+        <nav class="nav-links">
+            <a href="Homepage.html">Home</a>
+            <a href="diets.html">Diets</a>
+            <a href="exercise-physical.html">Exercise & Physical</a>
+            <a href="pt-chatbot.html">PT Chatbot</a>
+            <a href="supplements.html">Supplements</a>
+            <a href="about.html">About Us</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h1>Exercise & Calorie Tracker</h1>
+
+        <!-- Info Bubbles -->
+        <section id="info-bubbles">
+            <div class="bubble">
+                <h3>Build Muscle</h3>
+                <p>Strength training and weightlifting help build lean muscle, which increases your resting metabolic rate and burns more calories throughout the day.</p>
+            </div>
+            <div class="bubble">
+                <h3> Cardio Exercises</h3>
+                <p>Running, cycling, and swimming are excellent cardio workouts that burn high calories in a short time. Aim for at least 150 minutes per week.</p>
+            </div>
+            <div class="bubble">
+                <h3> Diet & Exercise</h3>
+                <p>Weight loss requires both a calorie deficit and regular exercise. Combine cardio workouts with strength training for optimal results.</p>
+            </div>
+            <div class="bubble">
+                <h3>High Intensity</h3>
+                <p>HIIT (High-Intensity Interval Training) is one of the most effective ways to burn calories quickly and improve cardiovascular fitness.</p>
+            </div>
+            <div class="bubble">
+                <h3>Consistency Wins</h3>
+                <p>Exercise 3-5 times per week and maintain a healthy diet. Consistency is more important than intensity for long-term weight loss.</p>
+            </div>
+            <div class="bubble">
+                <h3>Start Slow</h3>
+                <p>If you're new to exercise, start with walking or light cycling. Gradually increase intensity to avoid injury and build sustainable habits.</p>
+            </div>
+        </section>
+
+        <!-- Feature 1: Calorie Burn Calculator -->
+        <section id="calorie-calculator">
+            <h2>Calorie Burn Calculator</h2>
+            <form id="calorie-form">
+                <label for="exercise-type">Exercise Type:</label>
+                <select id="exercise-type">
+                    <option value="running">Running</option>
+                    <option value="cycling">Cycling</option>
+                    <option value="swimming">Swimming</option>
+                    <option value="walking">Walking</option>
+                    <option value="jumping-jacks">Jumping Jacks</option>
+                </select>
+                <label for="duration">Duration (minutes):</label>
+                <input type="number" id="duration" min="1" required>
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" min="1" required>
+                <button type="submit">Add Workout</button>
+                <button type="button" id="reset-calculator">Reset</button>
+            </form>
+            <div id="calorie-list"></div>
+            <h3>Total Calories Burned Today: <span id="total-calorie-result">0</span></h3>
+        </section>
+
+        <!-- Feature 2: Exercise Tracker (CRUD) -->
+        <section id="exercise-tracker">
+            <h2>Exercise Tracker</h2>
+            <form id="exercise-form">
+                <label for="exercise-name">Exercise Name:</label>
+                <select id="exercise-name" required>
+                    <option value="">Select an exercise</option>
+                    <option value="running">Running</option>
+                    <option value="cycling">Cycling</option>
+                    <option value="swimming">Swimming</option>
+                    <option value="walking">Walking</option>
+                    <option value="jumping-jacks">Jumping Jacks</option>
+                </select>
+                <label for="exercise-duration">Duration (minutes):</label>
+                <input type="number" id="exercise-duration" min="1" required>
+                <label for="exercise-date">Date:</label>
+                <input type="date" id="exercise-date" required>
+                <button type="submit">Add Exercise</button>
+            </form>
+            <ul id="exercise-list"></ul>
+        </section>
+
+        </section>
+    </main>
+
+    <script src="exercise.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
+

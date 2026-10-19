@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Your main site CSS (purple header/footer etc.) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="Fitness App Logo" class="logo" />
+
+  <nav class="nav-links">
+      <a href="Homepage.html">Home</a>
+      <a href="diets.html">Diets</a>
+      <a href="exercise-physical.html">Exercise & Physical</a>
+      <a href="pt-chatbot.html">PT Chatbot</a>
+      <a href="supplements.html">Supplements</a>
+      <a href="about.html">About Us</a>
+  </nav>
+</header>
+<main class="page-container">
+
+  <!-- 1. USER PROFILE -->
+  <section class="card">
+    <h2>User Profile</h2>
+    <p class="section-desc">
+      Enter your details:
+    </p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input id="age" type="number" min="10" max="100">
+      </div>
+
+      <div class="form-group">
+        <label for="sex">Sex marker</label>
+        <select id="sex">
+          <option value="">Select</option>
+          <option value="male">Male (reference)</option>
+          <option value="female">Female (reference)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="height">Height (cm)</label>
+        <input id="height" type="number" min="120" max="220">
+      </div>
+
+      <div class="form-group">
+        <label for="weight">Weight (kg)</label>
+        <input id="weight" type="number" min="35" max="250">
+      </div>
+
+      <div class="form-group">
+        <label for="activity">Activity level</label>
+        <select id="activity">
+          <option value="1.2">Mostly sitting</option>
+          <option value="1.375">Light activity (1–2x/week)</option>
+          <option value="1.55">Moderate (3–4x/week)</option>
+          <option value="1.725">Intense (5+ sessions/week)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="goal">Goal</label>
+        <select id="goal">
+          <option value="maintain">Maintain</option>
+          <option value="mild-loss">Gentle fat loss</option>
+          <option value="mild-gain">Gentle weight gain</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="saveProfileBtn">Save profile</button>
+    <p id="profileMsg" class="helper"></p>
+  </section>
+
+  <!-- 2. CALORIE & MACRO CALCULATOR WITH SLIDERS -->
+  <section class="card">
+    <h2>Daily Calorie & Macro Calculator</h2>
+    
+
+    <button class="btn" id="calcBtn">Calculate plan</button>
+    <p id="calcError" class="error"></p>
+
+    <div id="results" class="results" style="display:none; margin-top:10px;">
+      <p><strong>Maintenance:</strong> <span id="maintenanceKcal">–</span> kcal/day</p>
+      <p><strong>Target:</strong> <span id="targetKcal">–</span> kcal/day</p>
+
+      <hr style="margin:10px 0; border:none; border-top:1px solid #eee;">
+
+      <p class="section-desc">
+        Adjust your macro split using the sliders below. The total does not have to be exactly 100%, but that is a useful guide.
+      </p>
+
+      <!-- Protein row -->
+      <div class="macro-row">
+        <div class="macro-label">
+          <strong>Protein</strong>
+          <span class="helper">Supports muscle and recovery</span>
+        </div>
+        <div class="macro-control">
+          <input
+            type="range"
+            id="proteinPct"
+            min="0"
+            max="50"
+            value="20"
+            class="macro-slider"
+          >
+          <div class="macro-values">
+            <span id="proteinPctLabel">20%</span> ·
+            <span id="proteinGrams">0g</span>/day
+          </div>
+        </div>
+      </div>
+
+      <!-- Carbs row -->
+      <div class="macro-row">
+        <div class="macro-label">
+          <strong>Carbohydrates</strong>
+          <span class="helper">Main energy source</span>
+        </div>
+        <div class="macro-control">
+          <input
+            type="range"
+            id="carbPct"
+            min="0"
+            max="70"
+            value="50"
+            class="macro-slider"
+          >
+          <div class="macro-values">
+            <span id="carbPctLabel">50%</span> ·
+            <span id="carbGrams">0g</span>/day
+          </div>
+        </div>
+      </div>
+
+      <!-- Fat row -->
+      <div class="macro-row">
+        <div class="macro-label">
+          <strong>Fat</strong>
+          <span class="helper">Hormones & long-term energy</span>
+        </div>
+        <div class="macro-control">
+          <input
+            type="range"
+            id="fatPct"
+            min="0"
+            max="50"
+            value="30"
+            class="macro-slider"
+          >
+          <div class="macro-values">
+            <span id="fatPctLabel">30%</span> ·
+            <span id="fatGrams">0g</span>/day
+          </div>
+        </div>
+      </div>
+
+      <p class="helper">
+        Macro total: <span id="macroTotalPct">100%</span> (aim roughly around 100%, but small variation is fine).
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. CALORIE TRACKER DASHBOARD -->
+  <section class="card">
+    <h2>Daily Calorie Tracker Dashboard</h2>
+    <p class="section-desc">
+      Log your calories:
+    </p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="trackDate">Date</label>
+        <input type="date" id="trackDate">
+      </div>
+    </div>
+
+    <div class="form-grid tracker-grid">
+      <div class="form-group">
+        <label for="calBreakfast">Breakfast (kcal)</label>
+        <input type="number" id="calBreakfast" min="0">
+      </div>
+      <div class="form-group">
+        <label for="calLunch">Lunch (kcal)</label>
+        <input type="number" id="calLunch" min="0">
+      </div>
+      <div class="form-group">
+        <label for="calDinner">Dinner (kcal)</label>
+        <input type="number" id="calDinner" min="0">
+      </div>
+      <div class="form-group">
+        <label for="calSnacks">Snacks (kcal)</label>
+        <input type="number" id="calSnacks" min="0">
+      </div>
+    </div>
+
+    <button class="btn" id="updateTrackerBtn">Update tracker</button>
+    <p id="trackerMsg" class="helper"></p>
+
+    <div class="tracker-visuals">
+      <!-- Circular gauge -->
+      <div class="circle-wrapper">
+        <svg class="progress-ring" width="140" height="140">
+          <circle class="progress-bg" cx="70" cy="70" r="60"></circle>
+          <circle id="progressCircle" class="progress-value" cx="70" cy="70" r="60"></circle>
+        </svg>
+        <div class="circle-text">
+          <span id="circlePercent">0%</span>
+        </div>
+      </div>
+
+      <!-- Numbers & bar -->
+      <div class="tracker-numbers">
+        <p><strong>Target:</strong> <span id="dashTarget">–</span> kcal</p>
+        <p><strong>Logged:</strong> <span id="dashTotal">–</span> kcal</p>
+        <p><strong>Remaining:</strong> <span id="dashRemaining">–</span> kcal</p>
+
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
